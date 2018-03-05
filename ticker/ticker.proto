@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/opsee/protobuf/opseeproto/opsee.proto";
+
+package go.micro.srv.ticker;
+
+option (opseeproto.graphql) = true;
+
+service TickerService {
+    rpc GetAll(GetRequest) returns (TickerList) {}    
+}
+
+message TickerList {
+  repeated CoinItem items = 1;
+}
+
+message CoinItem {
+    string currencyPair = 1;
+    double last = 2;
+    double lowestAsk = 3;
+    double highestBid = 4;
+    double percentChange = 5;
+    double baseVolume = 6;
+    double quoteVolume = 7;
+    bool   frozen = 8;
+    double high24hr = 9;
+    double low24hr = 10;
+}
+
+message GetRequest {}
