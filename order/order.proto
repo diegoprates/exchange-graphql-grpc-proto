@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "github.com/opsee/protobuf/opseeproto/opsee.proto";
+
+package go.micro.srv.order;
+
+option (opseeproto.graphql) = true;
+
+service OrderService {
+    rpc Create(OrderRequest) returns (OrderResponse) {}
+    rpc Delete(OrderID) returns (DeleteResponse) {}
+}
+
+message OrderResponse {
+    int64 orderNumber = 1;
+    repeated Trade trades = 2;
+}
+
+message Trade {
+    int64 id = 1;
+    string type = 2;
+    double rate = 3;
+    double total = 4;
+    int64 date = 5;
+    double amount = 6;
+}
+
+message OrderID {
+    int64 id = 1;
+}
+
+message OrderRequest {
+    string type = 1;
+    string currencyPair = 2;
+    double rate = 3;
+    double amount = 4;
+}
+
+message DeleteResponse {
+    bool success = 1;
+}
