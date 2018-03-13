@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package go.micro.srv.wallet;
+
+service WalletService {
+    rpc CreateWallet (CreateWalletRequest) returns (CreateWalletResponse);
+}
+
+message CreateWalletRequest {
+	bytes public_passphrase = 1;
+	bytes private_passphrase = 2;
+	bytes seed = 3;
+}
+
+message CreateWalletResponse {}
